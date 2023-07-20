@@ -7,27 +7,25 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import web.dao.CarDAO;
-import web.models.Car;
-
-import java.util.List;
+import web.service.CarService;
 
 @Controller
 @RequestMapping("/cars")
 public class CarController {
-    private final CarDAO carDAO;
+    private CarService carService;
     @Autowired
-    public CarController(CarDAO carDAO) {
-        this.carDAO = carDAO;
+    public CarController(CarService carService) {
+        this.carService = carService;
     }
 
     @GetMapping()
     public String index (Model model) {
-        model.addAttribute("cars", carDAO.index());
+        model.addAttribute("cars", carService.index());
         return "cars";
     }
     @GetMapping("/{count}")
     public String show(@PathVariable("count") int count, Model model) {
-        model.addAttribute("cars", carDAO.showCarNumber(count));
+        model.addAttribute("cars", carService.showCarNumber(count));
         return "cars";
     }
 }
