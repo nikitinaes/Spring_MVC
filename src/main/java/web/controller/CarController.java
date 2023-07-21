@@ -6,7 +6,6 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
-import web.dao.CarDAO;
 import web.service.CarService;
 
 @Controller
@@ -19,12 +18,12 @@ public class CarController {
     }
 
     @GetMapping()
-    public String index (Model model) {
-        model.addAttribute("cars", carService.index());
+    public String getAllCars(Model model) {
+        model.addAttribute("cars", carService.showAllCars());
         return "cars";
     }
     @GetMapping("/{count}")
-    public String show(@PathVariable("count") int count, Model model) {
+    public String showCars(@PathVariable("count") int count, Model model) {
         model.addAttribute("cars", carService.showCarNumber(count));
         return "cars";
     }

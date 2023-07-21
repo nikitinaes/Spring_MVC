@@ -8,7 +8,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
-public class CarDAOImpl implements CarDAO{
+public class CarDaoImpl implements CarDao {
 
     private static int CAR_COUNT;
     private List<Car> cars;
@@ -24,16 +24,17 @@ public class CarDAOImpl implements CarDAO{
 
 
 
-    public List<Car> showCarNumber(int count) {
+        public List<Car> showCarNumber ( int count){
         if (count >= 5) {
             return cars;
-        } else {
+        } else if (count > 0){
             return cars.stream().limit(count).collect(Collectors.toList());
+        } else
+            return null;
         }
-    }
 
     @Override
-    public List<Car> index() {
+    public List<Car> showAllCars() {
         return cars;
     }
 }
